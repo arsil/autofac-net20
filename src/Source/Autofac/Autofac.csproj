@@ -72,7 +72,15 @@
   <ItemGroup>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion)!='v2.0'">
     <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion)=='v2.0'">  
+    <Reference Include="linqbridge">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\LinqBridge\LinqBridge.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition="($(TargetFrameworkVersion)=='v4.0') And ($(MSBuildTargets)!='Windows Phone 7')">
     <Reference Include="System.ComponentModel.Composition" />
@@ -83,8 +91,12 @@
     <Compile Include="Features\Metadata\StronglyTypedMeta.cs" />
     <Compile Include="Features\Metadata\StronglyTypedMetaRegistrationSource.cs" />
   </ItemGroup>
-  <ItemGroup Condition="$(MSBuildTargets)!='Windows Phone 7'">
+  <ItemGroup Condition="($(MSBuildTargets)!='Windows Phone 7') And ($(TargetFrameworkVersion)!='v2.0')">
     <Compile Include="Features\GeneratedFactories\FactoryGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion)=='v2.0'">
+    <Compile Include="Features\GeneratedFactories\FactoryGeneratorForNet20.cs" />
+    <Compile Include="Features\GeneratedFactories\GeneratedFactoryForNet20.cs" />	
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\GlobalAssemblyInfo.cs">
@@ -96,7 +108,7 @@
     <Compile Include="Builder\ConcreteReflectionActivatorData.cs" />
     <Compile Include="Builder\ContainerBuildOptions.cs" />
     <Compile Include="Builder\IRegistrationBuilder.cs" />
-    <Compile Include="Builder\MetadataConfiguration.cs" />
+    <Compile Include="Builder\MetadataConfiguration.cs" />		
     <Compile Include="Builder\IConcreteActivatorData.cs" />
     <Compile Include="Core\Registration\CopyOnWriteRegistry.cs" />
     <Compile Include="Features\Variance\ContravariantRegistrationSource.cs" />

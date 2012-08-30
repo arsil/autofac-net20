@@ -25,7 +25,11 @@
 
 using System;
 using System.Collections.Generic;
+
+#if !NET20
 using System.Linq.Expressions;
+#endif
+
 using Autofac.Core;
 using Autofac.Util;
 
@@ -43,7 +47,8 @@ namespace Autofac.Builder
         readonly IDictionary<string, object> _properties = new Dictionary<string, object>();
 
         internal IEnumerable<KeyValuePair<string, object>> Properties { get { return _properties; } }
-
+		
+#if !NET20
         /// <summary>
         /// Set one of the property values.
         /// </summary>
@@ -57,5 +62,23 @@ namespace Autofac.Builder
             _properties.Add(pn, value);
             return this;
         }
+#endif		
+		
+        /// <summary>
+        /// Set one of the property values.
+        /// </summary>
+		/// <param name="propertyName">Name of the property</param>
+        /// <param name="value">The property value to set.</param>
+        public MetadataConfiguration<TMetadata> For<TProperty>(string propertyName, TProperty value)
+        {
+			if (string.IsNullOrEmpty(propertyName))
+				throw new ArgumentNullException("propertyName");
+
+			if (typeof(TMetadata).GetProperty(propertyName) == null)
+				throw new ArgumentException("propertyName");
+
+			_properties.Add(propertyName, value);
+            return this;
+        }		
     }
 }

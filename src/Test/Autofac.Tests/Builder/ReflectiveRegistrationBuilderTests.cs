@@ -1,5 +1,9 @@
 ﻿using System;
+
+#if !NET20
 using System.Linq.Expressions;
+#endif
+
 using NUnit.Framework;
 using Autofac.Core;
 
@@ -56,6 +60,7 @@ namespace Autofac.Tests.Builder
                 typeof(TwoCtors).GetConstructor(result.CalledCtor));
         }
 
+#if !NET20		
         [Test]
         public void ExplicitCtorFromExpression()
         {
@@ -89,6 +94,7 @@ namespace Autofac.Tests.Builder
             Assert.That(result, Is.Not.Null);
             Assert.That(result.CalledCtor, Is.EqualTo(new[] {typeof(A1)}));
         }
+#endif		
 
         [Test]
         public void UsingConstructorThatIsNotPresent_ThrowsArgumentException()
@@ -106,6 +112,7 @@ namespace Autofac.Tests.Builder
             Assert.Throws<ArgumentNullException>(() => registration.UsingConstructor((Type[])null));
         }
 
+#if !NET20		
         [Test]
         public void NullIsNotAValidExpressionConstructor()
         {
@@ -113,6 +120,7 @@ namespace Autofac.Tests.Builder
             var registration = cb.RegisterType<TwoCtors>();
             Assert.Throws<ArgumentNullException>(() => registration.UsingConstructor((Expression<Func<TwoCtors>>)null));
         }
+#endif		
 
         public class WithParam
         {

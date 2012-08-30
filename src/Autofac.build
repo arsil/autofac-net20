@@ -49,6 +49,12 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <AllowPartiallyTrustedCallers>false</AllowPartiallyTrustedCallers>
   </PropertyGroup>
+  <PropertyGroup Condition="$(BuildFramework)=='NET20'">
+    <PackageName>$(ProjectName)-$(Version)-NET20</PackageName>
+    <BuildConstants>NET35;NET20</BuildConstants>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <AllowPartiallyTrustedCallers>false</AllowPartiallyTrustedCallers>
+  </PropertyGroup>  
   <PropertyGroup Condition="$(BuildFramework)=='WP7'">
     <BuildTargets>Windows Phone 7</BuildTargets>
     <BuildConstants>SILVERLIGHT;SL3;WINDOWS_PHONE</BuildConstants>
