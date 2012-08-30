@@ -73,6 +73,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion)=='v2.0'">  
+    <Reference Include="linqbridge">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\LinqBridge\LinqBridge.dll</HintPath>
+    </Reference>
+  </ItemGroup>  
   <ItemGroup>
     <Compile Include="AssertionHelpers.cs" />
     <Compile Include="ConfigurationSettingsReaderFixture.cs" />
