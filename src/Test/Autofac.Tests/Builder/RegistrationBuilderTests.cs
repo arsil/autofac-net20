@@ -14,7 +14,8 @@ namespace Autofac.Tests.Builder
             int A { get; }
             string B { get; }
         }
-
+		
+#if !NET20
         [Test]
         public void WhenPropetyFromStronglyTypedInterfaceConfigured_ReflectedInComponentRegistration()
         {
@@ -35,6 +36,28 @@ namespace Autofac.Tests.Builder
             Assert.Throws<ArgumentException>(() =>
                 builder.WithMetadata<IProperties>(ep => ep.For(p => 42, 42)));
         }
+#endif
+		
+        [Test]
+        public void WhenPropetyFromStronglyTypedInterfaceConfigured_ReflectedInComponentRegistrationOld()
+        {
+            var builder = RegistrationBuilder.ForType<object>();
+            builder.WithMetadata<IProperties>(ep => ep
+                .For("A", 42)
+                .For("B", "hello"));
+            
+            var reg = builder.CreateRegistration();
+            Assert.AreEqual(42, reg.Metadata["A"]);
+            Assert.AreEqual("hello", reg.Metadata["B"]);
+        }
+
+        [Test]
+        public void WhenAccessorNotPropertyAccessExpression_ArgumentExceptionThrownOld()
+        {
+            var builder = RegistrationBuilder.ForType<object>();
+            Assert.Throws<ArgumentException>(() =>
+                builder.WithMetadata<IProperties>(ep => ep.For("Value", 42)));
+        }		
 
         [Test]
         public void AsEmptyList_CreatesRegistrationWithNoServices()

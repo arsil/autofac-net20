@@ -101,6 +101,12 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion)=='v2.0'">  
+    <Reference Include="linqbridge">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\LinqBridge\LinqBridge.dll</HintPath>
+    </Reference>
+  </ItemGroup>  
   <ItemGroup Condition="($(TargetFrameworkVersion)=='v4.0') And ($(MSBuildTargets) != 'Windows Phone 7')">
     <Compile Include="Core\Activators\Reflection\DefaultValueParameterTests.cs" />
     <Compile Include="Features\LazyDependencies\LazyRegistrationSourceTests.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Autofac.Builder;
 using Autofac.Features.Indexed;
 
-#if !WINDOWS_PHONE
+#if !(WINDOWS_PHONE || NET20)
 using Autofac.Tests.Scenarios.ScannedAssembly;
 using Moq;
 #endif
@@ -142,7 +142,7 @@ namespace Autofac.Tests
             Assert.IsTrue(container.IsRegistered<object>());
         }
 
-#if !WINDOWS_PHONE
+#if !(WINDOWS_PHONE || NET20)
 
         [Test]
         public void RegisterAssemblyModules()
@@ -523,7 +523,7 @@ namespace Autofac.Tests
             Assert.That(ex.Message.Contains("once"));
         }
 
-#if !WINDOWS_PHONE
+#if !(WINDOWS_PHONE || NET20)
         [Test]
         public void WhenTheContainerIsBuilt_StartableComponentsAreStarted()
         {

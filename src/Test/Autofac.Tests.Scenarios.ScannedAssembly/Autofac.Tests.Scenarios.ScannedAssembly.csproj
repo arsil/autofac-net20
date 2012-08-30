@@ -77,6 +77,12 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
   </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion)=='v2.0'">  
+    <Reference Include="linqbridge">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\LinqBridge\LinqBridge.dll</HintPath>
+    </Reference>
+  </ItemGroup>  
   <ItemGroup>
     <Compile Include="AComponent.cs" />
     <Compile Include="ADisposable.cs" />
