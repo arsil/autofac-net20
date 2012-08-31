@@ -124,7 +124,7 @@
     <Copy SourceFiles="@(ConfigFiles)" DestinationFolder="$(TestPath)\Configuration" />
     
     <!--Licenses-->
-    <CreateItem Include="*License.txt">
+    <CreateItem Include="*License.txt;Resource\Library\LinqBridge\*.txt">
       <Output ItemName="licenseFiles" TaskParameter="Include"/>
     </CreateItem>
     <Copy SourceFiles="@(licenseFiles)" DestinationFolder="$(LicensePath)" />
@@ -193,7 +193,7 @@
     <MakeDir Directories="$(PackageDirectory)" />
 
     <!-- Archive-->
-    <CreateItem Include="$(LibraryPath)\Autofac*.*;$(LicensePath)\*.*">
+    <CreateItem Include="$(LibraryPath)\Autofac*.*;$(LibraryPath)\LinqBridge*.*;$(LicensePath)\*.*">
       <Output ItemName="_libFiles" TaskParameter="Include" />
     </CreateItem>
     <Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(PackageName).zip" Flatten="true" WorkingDirectory="$(BuildPath)" />
