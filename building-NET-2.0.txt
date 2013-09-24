@@ -1,0 +1,2 @@
+run goNET20.cmd from src folder.
+Ignore errors - look for a final version inside src\Source\Autofac.Configuration\bin\Release folder.

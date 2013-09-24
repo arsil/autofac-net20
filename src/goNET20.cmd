@@ -1,0 +1,1 @@
+go /T:Clean;_Version;Build /P:Version=2.6.1.900 /P:BuildFramework=NET20

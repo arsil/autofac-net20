@@ -124,7 +124,7 @@
     <Copy SourceFiles="@(ConfigFiles)" DestinationFolder="$(TestPath)\Configuration" />
     
     <!--Licenses-->
-    <CreateItem Include="*License.txt;Resource\Library\LinqBridge\*.txt">
+    <CreateItem Include="*License.txt;Resource\Library\RuntimeSystemBridge\*.txt">
       <Output ItemName="licenseFiles" TaskParameter="Include"/>
     </CreateItem>
     <Copy SourceFiles="@(licenseFiles)" DestinationFolder="$(LicensePath)" />
@@ -168,11 +168,13 @@
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"
       AssemblyConfiguration="$(Configuration) built on $(BuildTime)" />
+	<!-- NET 2.0 - for testing
     <WriteLinesToFile
       File="%(_VersionFiles.FullPath)"
       Overwrite="false"
       Lines="[assembly: System.Security.SecurityTransparent];[assembly: System.Security.SecurityRules(System.Security.SecurityRuleSet.Level2)]"
       Condition="$(AllowPartiallyTrustedCallers)==true" />
+	  -->
   </Target>
 
 
@@ -193,7 +195,7 @@
     <MakeDir Directories="$(PackageDirectory)" />
 
     <!-- Archive-->
-    <CreateItem Include="$(LibraryPath)\Autofac*.*;$(LibraryPath)\LinqBridge*.*;$(LicensePath)\*.*">
+    <CreateItem Include="$(LibraryPath)\Autofac*.*;$(LibraryPath)\SystemBridge*.*;$(LicensePath)\*.*">
       <Output ItemName="_libFiles" TaskParameter="Include" />
     </CreateItem>
     <Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(PackageName).zip" Flatten="true" WorkingDirectory="$(BuildPath)" />
