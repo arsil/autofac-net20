@@ -77,9 +77,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFrameworkVersion)=='v2.0'">  
-    <Reference Include="linqbridge">
+    <Reference Include="RuntimeSystemBridge">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Resource\Library\LinqBridge\LinqBridge.dll</HintPath>
+      <HintPath>..\..\Resource\Library\RuntimeSystemBridge\SystemBridge20To35.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="($(TargetFrameworkVersion)=='v4.0') And ($(MSBuildTargets)!='Windows Phone 7')">
