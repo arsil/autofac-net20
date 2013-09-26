@@ -15,7 +15,6 @@ namespace Autofac.Tests.Builder
             string B { get; }
         }
 		
-#if !NET20
         [Test]
         public void WhenPropetyFromStronglyTypedInterfaceConfigured_ReflectedInComponentRegistration()
         {
@@ -36,10 +35,8 @@ namespace Autofac.Tests.Builder
             Assert.Throws<ArgumentException>(() =>
                 builder.WithMetadata<IProperties>(ep => ep.For(p => 42, 42)));
         }
-#endif
-		
         [Test]
-        public void WhenPropetyFromStronglyTypedInterfaceConfigured_ReflectedInComponentRegistrationOld()
+        public void WhenPropetyFromStronglyTypedInterfaceConfigured_ReflectedInComponentRegistrationOldNamed()
         {
             var builder = RegistrationBuilder.ForType<object>();
             builder.WithMetadata<IProperties>(ep => ep
@@ -52,7 +49,7 @@ namespace Autofac.Tests.Builder
         }
 
         [Test]
-        public void WhenAccessorNotPropertyAccessExpression_ArgumentExceptionThrownOld()
+        public void WhenAccessorNotPropertyAccessExpression_ArgumentExceptionThrownOldNamed()
         {
             var builder = RegistrationBuilder.ForType<object>();
             Assert.Throws<ArgumentException>(() =>

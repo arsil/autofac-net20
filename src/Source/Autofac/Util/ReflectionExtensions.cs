@@ -24,11 +24,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-
-#if !NET20
 using System.Linq.Expressions;
-#endif
-
 using System.Reflection;
 
 namespace Autofac.Util
@@ -56,8 +52,6 @@ namespace Autofac.Util
             prop = null;
             return false;
         }
-
-#if !NET20
 
         /// <summary>
         /// Get a PropertyInfo object from an expression of the form
@@ -117,8 +111,5 @@ namespace Autofac.Util
                     constructorCallExpression));
             return callExpression.Constructor;
         }
-		
-#endif	
-	
     }
 }
