@@ -26,9 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if !NET20
 using System.Linq.Expressions;
-#endif
 using System.Reflection;
 using Autofac.Builder;
 using Autofac.Core;
@@ -737,7 +735,6 @@ namespace Autofac
             return registration;
         }
 
-#if !NET20
         /// <summary>
         /// Set the policy used to select from available constructors on the implementation type.
         /// </summary>
@@ -760,7 +757,6 @@ namespace Autofac
             var parameterTypes = constructor.GetParameters().Select(p => p.ParameterType).ToArray();
             return UsingConstructor(registration, parameterTypes);
         }
-#endif
 
         /// <summary>
         /// Configure an explicit value for a constructor parameter.

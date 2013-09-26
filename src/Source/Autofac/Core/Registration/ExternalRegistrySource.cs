@@ -60,8 +60,13 @@ namespace Autofac.Core.Registration
         /// <returns>Registrations providing the service.</returns>
         public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
         {
+#if !WINDOWS_PHONE
             var seenRegistrations = new HashSet<IComponentRegistration>();
             var seenServices = new HashSet<Service>();
+#else
+            var seenRegistrations = new List<IComponentRegistration>();
+            var seenServices = new List<Service>();
+#endif
             var lastRunServices = new List<Service> { service };
 
             while (lastRunServices.Any())
@@ -95,22 +100,5 @@ namespace Autofac.Core.Registration
         {
             get { return false; }
         }
-        
-#if (WINDOWS_PHONE || NET20)
-        class HashSet<T> : Dictionary<T, object>
-        {
-            public bool Contains(T key)
-            {
-                return ContainsKey(key);
-            }
-            
-            public void Add(T key)
-            {
-                (this)[key] = padlock;
-            }
-            
-            private readonly object padlock = new object();
-        }
-#endif		
     }
 }

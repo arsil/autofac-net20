@@ -25,10 +25,7 @@
 
 using System;
 using System.Globalization;
-
-#if !(WINDOWS_PHONE || NET20)
 using System.Linq.Expressions;
-#endif
 
 namespace Autofac.Core.Lifetime
 {
@@ -40,7 +37,7 @@ namespace Autofac.Core.Lifetime
         readonly Func<ILifetimeScope, bool> _matcher;
         readonly string _matchExpressionCode;
 
-#if !(WINDOWS_PHONE || NET20)
+#if !WINDOWS_PHONE
         /// <summary>
         /// Match scopes based on the provided expression.
         /// </summary>
